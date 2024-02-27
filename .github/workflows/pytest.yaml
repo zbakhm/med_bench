@@ -49,9 +49,9 @@ jobs:
 
         Rscript -e 'library(devtools);devtools::install_github("ohines/plmed", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
   
-        Rscript -e 'install.packages("grf", repos="https://CRAN.R-project.org/package=grf", quiet=TRUE, lib=.libPaths()[1])'
-        Rscript -e 'install.packages("causalweight", repos="https://CRAN.R-project.org/package=causalweight", quiet=TRUE, lib=.libPaths()[1])'
-        Rscript -e 'install.packages("mediation", repos="https://CRAN.R-project.org/package=mediation", quiet=TRUE, lib=.libPaths()[1])'
+        Rscript -e 'install.packages("grf", repos="https://CRAN.R-project.org/package=grf", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+        Rscript -e 'install.packages("causalweight", repos="https://CRAN.R-project.org/package=causalweight", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER")'
+        Rscript -e 'install.packages("mediation", repos="https://CRAN.R-project.org/package=mediation", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER")'
 
     - name: Run tests
       run: |
