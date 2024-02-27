@@ -38,21 +38,20 @@ jobs:
         r-version: '4.3.2' # Use the R version you prefer
 
     - name: Install R packages
-      uses: r-lib/actions/setup-r-dependencies@v2
-      with:
-        cache-version: 2
-        extra-packages: |
-          grf
-          causalweight
-          mediation
-          devtools
+      run: |
+        # Create a directory for R packages in the GitHub workspace
+        mkdir -p $HOME/R
 
-    - name: Install other R packages
-      uses: r-lib/actions/setup-r-dependencies@v2
-      with:
-        cache-version: 2
-        extra-packages: |
-          ohines/plmed
+        # Set R_LIBS_USER environment variable to the custom library directory
+        export R_LIBS_USER=$HOME/R
+        
+        Rscript -e 'install.packages("devtools", repos=" https://CRAN.R-project.org/package=devtools", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+
+        Rscript -e 'library(devtools);devtools::install_github("ohines/plmed", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+  
+        Rscript -e 'install.packages("grf", repos="https://CRAN.R-project.org/package=grf", quiet=TRUE, lib=.libPaths()[1])'
+        Rscript -e 'install.packages("causalweight", repos="https://CRAN.R-project.org/package=causalweight", quiet=TRUE, lib=.libPaths()[1])'
+        Rscript -e 'install.packages("mediation", repos="https://CRAN.R-project.org/package=mediation", quiet=TRUE, lib=.libPaths()[1])'
 
     - name: Run tests
       run: |
