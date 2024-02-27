@@ -28,9 +28,16 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install r-base r-base-dev
-        Rscript -e 'install.packages(c("grf", "causalweight", "mediation"))'
-        Rscript -e 'install.packages("devtools")'
-        Rscript -e 'devtools::install_github("ohines/plmed")'
+
+        # Create a directory for R packages in the GitHub workspace
+        mkdir -p $HOME/R
+
+        # Set R_LIBS_USER environment variable to the custom library directory
+        export R_LIBS_USER=$HOME/R
+
+        Rscript -e 'install.packages(c("grf", "causalweight", "mediation"), lib=Sys.getenv("R_LIBS_USER"))'
+        Rscript -e 'install.packages("devtools", lib=Sys.getenv("R_LIBS_USER"))'
+        Rscript -e 'devtools::install_github("ohines/plmed", lib=Sys.getenv("R_LIBS_USER"))'
 
     - name: Run tests
       run: |
