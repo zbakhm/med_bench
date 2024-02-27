@@ -35,11 +35,15 @@ jobs:
         # Set R_LIBS_USER environment variable to the custom library directory
         export R_LIBS_USER=$HOME/R
 
-        Rscript -e 'install.packages("grf", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-        Rscript -e 'install.packages("causalweight", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-        Rscript -e 'install.packages("mediation", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-        Rscript -e 'install.packages("devtools", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-        Rscript -e 'devtools::install_github("ohines/plmed", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+        Rscript -e 'install.packages("grf", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+        Rscript -e 'install.packages("causalweight", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+        Rscript -e 'install.packages("mediation", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+
+    - name: Install devtools
+      run: Rscript -e 'install.packages("devtools", repos="https://cran.rstudio.com/", quiet=TRUE)'
+
+    - name: Install plmed from GitHub
+      run: Rscript -e 'devtools::install_github("ohines/plmed", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
 
     - name: Run tests
       run: |
