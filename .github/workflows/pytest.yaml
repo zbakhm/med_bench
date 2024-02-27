@@ -42,17 +42,17 @@ jobs:
       with:
         cache-version: 2
         extra-packages: |
+          grf
+          causalweight
+          mediation
           devtools
-          ohines/plmed
-          
+
     - name: Install other R packages
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
         cache-version: 2
         extra-packages: |
-          grf
-          causalweight
-          mediation
+          ohines/plmed
 
     - name: Run tests
       run: |
