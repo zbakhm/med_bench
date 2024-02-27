@@ -32,24 +32,12 @@ jobs:
         python -m pip install --upgrade pip
         pip install -e ".[dev]"
 
-    - name: Install R and R packages
+    - name: Install R and devtools
+      
       run: |
         sudo apt-get update
         sudo apt-get install r-base r-base-dev
 
-        # Create a directory for R packages in the GitHub workspace
-        mkdir -p $HOME/R
-
-        # Set R_LIBS_USER environment variable to the custom library directory
-        export R_LIBS_USER=$HOME/R
-
-        Rscript -e 'install.packages("grf", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-        Rscript -e 'install.packages("causalweight", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-        Rscript -e 'install.packages("mediation", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-
-    - name: Install devtools
-      
-      run: |
         # Create a directory for R packages in the GitHub workspace
         mkdir -p $HOME/R
 
@@ -60,6 +48,21 @@ jobs:
 
     - name: Install plmed from GitHub
       run: Rscript -e 'devtools::install_github("ohines/plmed", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+
+    - name: Install other R packages
+      run: |
+        # sudo apt-get update
+        # sudo apt-get install r-base r-base-dev
+
+        # # Create a directory for R packages in the GitHub workspace
+        # mkdir -p $HOME/R
+
+        # # Set R_LIBS_USER environment variable to the custom library directory
+        # export R_LIBS_USER=$HOME/R
+
+        Rscript -e 'install.packages("grf", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+        Rscript -e 'install.packages("causalweight", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+        Rscript -e 'install.packages("mediation", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
 
     - name: Run tests
       run: |
