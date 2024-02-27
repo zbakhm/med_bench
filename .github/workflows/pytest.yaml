@@ -48,7 +48,15 @@ jobs:
         Rscript -e 'install.packages("mediation", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
 
     - name: Install devtools
-      run: Rscript -e 'install.packages("devtools", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
+      
+      run: |
+        # Create a directory for R packages in the GitHub workspace
+        mkdir -p $HOME/R
+
+        # Set R_LIBS_USER environment variable to the custom library directory
+        export R_LIBS_USER=$HOME/R
+        
+        Rscript -e 'install.packages("devtools", repos="https://cran.rstudio.com/", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
 
     - name: Install plmed from GitHub
       run: Rscript -e 'devtools::install_github("ohines/plmed", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
