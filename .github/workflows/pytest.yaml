@@ -36,11 +36,11 @@ jobs:
       with:
         cache-version: 1
         packages: |
-          devtools
+          devtools          
 
     - name: Install plmed package          
       run: |    
-        R -e "devtools::install_github('ohines/plmed')"    
+        R -e "pak::pkg_install('ohines/plmed')"
 
       # run: |
       #   R -e "install.packages('devtools', quiet=TRUE)"
