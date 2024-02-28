@@ -41,7 +41,9 @@ jobs:
       #     causalweight
       #     mediation
       run: |
+        Rscript -e 'install.packages("libcurl")'
         Rscript -e 'install.packages("pak")'
+        Rscript -e 'library(pak)'
         Rscript -e 'pak::pkg_install(c("grf", "causalweight", "mediation", "ohines/plmed"))'
 
     # - name: Install plmed package          
