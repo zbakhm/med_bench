@@ -42,7 +42,7 @@ jobs:
       #     mediation
       run: |
         R -q -e 'dir.create(Sys.getenv("R_LIB_FOR_PAK"), recursive = TRUE, showWarnings = FALSE)'
-        R -q -e 'install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/", lib = Sys.getenv("R_LIB_FOR_PAK"))''
+        R -q -e 'install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/", lib = Sys.getenv("R_LIB_FOR_PAK"))'
         R -q -e 'library(pak)'
         R -q -e 'pak::pkg_install(c("grf", "causalweight", "mediation", "ohines/plmed"))'
 
