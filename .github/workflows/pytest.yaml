@@ -44,12 +44,11 @@ jobs:
           devtools
           grf
           causalweight
-          mediation
-          ohines/plmed                    
+          mediation                    
 
-    # - name: Install plmed package          
-    #   run: |    
-    #     R -e "pak::pkg_install('ohines/plmed')"
+    - name: Install plmed package          
+      run: |    
+        R -e "pak::pkg_install('ohines/plmed')"
 
     - name: Install Pytest
       run: |
