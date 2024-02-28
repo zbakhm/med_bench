@@ -29,6 +29,7 @@ jobs:
       with:
         r-version: '4.3.2' # Use the R version you prefer
         extra-repositories: |
+          pak
           grf
           causalweight
           mediation
