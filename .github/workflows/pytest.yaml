@@ -31,10 +31,10 @@ jobs:
 
     - name: Install R packages
       run: |
-        R -e "install.packages('devtools', repos='https://cloud.r-project.org/', quiet=TRUE)"
+        R -e "install.packages('devtools', quiet=TRUE)"
         R -e "library(devtools)"
         R -e "devtools::install_github('ohines/plmed')"
-        # R -e "install.packages(c('grf', 'causalweight', 'mediation'), repos='https://cloud.r-project.org/', quiet=TRUE)"
+        # R -e "install.packages(c('grf', 'causalweight', 'mediation'), quiet=TRUE)"
 
     - name: Run tests
       run: |
