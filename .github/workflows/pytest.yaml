@@ -17,15 +17,7 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.10'  # Specify the Python version you want to use
-
-    - name: Cache R packages
-      uses: actions/cache@v2
-      with:
-        path: $HOME/R
-        key: ${{ runner.os }}-R
-        restore-keys: |
-          ${{ runner.os }}-R-       
+        python-version: '3.10'  # Specify the Python version you want to use    
 
     - name: Install Package in Editable Mode with Python Dependencies
       run: |
@@ -39,19 +31,10 @@ jobs:
 
     - name: Install R packages
       run: |
-        # Create a directory for R packages in the GitHub workspace
-        mkdir -p $HOME/R
-
-        # Set R_LIBS_USER environment variable to the custom library directory
-        export R_LIBS_USER=$HOME/R
-        
-        Rscript -e 'install.packages("devtools", repos=" https://CRAN.R-project.org/package=devtools", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-
-        Rscript -e 'library(devtools);devtools::install_github("ohines/plmed", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-  
-        Rscript -e 'install.packages("grf", repos="https://CRAN.R-project.org/package=grf", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER"))'
-        Rscript -e 'install.packages("causalweight", repos="https://CRAN.R-project.org/package=causalweight", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER")'
-        Rscript -e 'install.packages("mediation", repos="https://CRAN.R-project.org/package=mediation", quiet=TRUE, lib=Sys.getenv("R_LIBS_USER")'
+        R -e "install.packages('devtools', repos='https://cloud.r-project.org/', quiet=TRUE)"
+        R -e "library(devtools)"
+        R -e "devtools::install_github('ohines/plmed')"
+        # R -e "install.packages(c('grf', 'causalweight', 'mediation'), repos='https://cloud.r-project.org/', quiet=TRUE)"
 
     - name: Run tests
       run: |
