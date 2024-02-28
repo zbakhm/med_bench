@@ -33,16 +33,23 @@ jobs:
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
         cache: true
-        cache-version: 1
-        packages: |
+        cache-version: 2
+        # packages: |
+        #   devtools
+        #   grf
+        #   causalweight
+        #   mediation
+
+        extra-packages: |
           devtools
           grf
           causalweight
-          mediation          
+          mediation
+          ohines/plmed                    
 
-    - name: Install plmed package          
-      run: |    
-        R -e "pak::pkg_install('ohines/plmed')"
+    # - name: Install plmed package          
+    #   run: |    
+    #     R -e "pak::pkg_install('ohines/plmed')"
 
     - name: Install Pytest
       run: |
