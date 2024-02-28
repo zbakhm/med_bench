@@ -40,7 +40,7 @@ jobs:
         #   causalweight
         #   mediation
 
-        extra-packages: |
+        dependencies: |
           devtools
           grf
           causalweight
