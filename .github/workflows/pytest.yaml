@@ -33,7 +33,7 @@ jobs:
       with:
         cache: true
         cache-version: 1
-        dependencies: '"hard"'
+        dependencies: 'FALSE'
 
         packages: |
           grf
