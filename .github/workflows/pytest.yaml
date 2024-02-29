@@ -33,7 +33,7 @@ jobs:
       with:
         cache: true
         cache-version: 1
-        dependencies: 'c("Depends", "Imports")'
+        dependencies: 'c("Depends", "LinkingTo")'
 
         packages: |
           grf
