@@ -32,8 +32,8 @@ jobs:
       uses: r-lib/actions/setup-r-dependencies@v2
       with:
         cache: true
-        cache-version: 2
-        dependencies: '"Depends"'
+        cache-version: 1
+        dependencies: '"hard"'
 
         packages: |
           # devtools
