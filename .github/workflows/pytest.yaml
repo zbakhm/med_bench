@@ -23,38 +23,29 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -e ".[dev]"
-
     - name: Setup R
       uses: r-lib/actions/setup-r@v2
       with:
         r-version: '4.3.2' # Use the R version you prefer
 
     - name: Install R packages
-      # uses: r-lib/actions/setup-r-dependencies@v2
-      # with:
-      #   cache: true
-      #   cache-version: 1
-      #   dependencies: '"Suggests"'
-      #   packages: |
-      #     devtools
-      #     grf
-      #     causalweight
-      #     mediation
-      run: |
-        mkdir -p $HOME/R
-        export R_LIBS_USER=$HOME/R
-        R -q -e 'install.packages("pak", repos = "https://r-lib.github.io/p/pak/stable/", lib = Sys.getenv("R_LIBS_USER"))'
-        R -q -e 'library(pak)'
-        R -q -e 'pak::pkg_install(c("grf", "causalweight", "mediation", "ohines/plmed"))'
+      uses: r-lib/actions/setup-r-dependencies@v2
+      with:
+        cache: true
+        cache-version: 2
+        dependencies: '"Depends"'
 
-    # - name: Install plmed package          
-    #   run: |    
-    #     R -e "pak::pkg_install('ohines/plmed')"
-
+        packages: |
+          # devtools
+          grf
+          causalweight
+          mediation
+    - name: Install plmed package          
+      run: |    
+        R -e "pak::pkg_install('ohines/plmed')"
     - name: Install Pytest
       run: |
         pip install pytest
-
     - name: Run tests
       run: |
         pytest
