@@ -36,10 +36,10 @@ jobs:
         dependencies: '"hard"'
 
         packages: |
-          # devtools
           grf
           causalweight
           mediation
+
     - name: Install plmed package          
       run: |    
         R -e "pak::pkg_install('ohines/plmed')"
